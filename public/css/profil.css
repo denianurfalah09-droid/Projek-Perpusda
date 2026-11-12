@@ -1,0 +1,329 @@
+/* ================= DASAR ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    min-height: 75px;
+    background: #f5f5df;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 8%;
+
+    position: relative;
+}
+
+.logo h2 {
+    color: #064b9b;
+    font-size: 22px;
+}
+
+.logo span {
+    color: #064b9b;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+/* MENU DESKTOP */
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #064b9b;
+}
+
+
+/* HAMBURGER */
+
+#menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+}
+
+
+/* ================= JUDUL HALAMAN ================= */
+
+.page-title {
+    background: #063d86;
+    color: white;
+
+    padding: 20px 8%;
+}
+
+.page-title h1 {
+    font-size: 26px;
+}
+
+
+/* ================= PROFIL ================= */
+
+.profil {
+    background: #f5f5df;
+
+    max-width: 1200px;
+    margin: 0 auto;
+
+    padding: 25px 3%;
+
+    display: flex;
+    gap: 20px;
+}
+
+
+/* GAMBAR */
+
+.profil-image {
+    width: 35%;
+}
+
+.profil-image img {
+    width: 100%;
+    height: 365px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* ISI PROFIL */
+
+.profil-content {
+    width: 65%;
+}
+
+.profil-item {
+    margin-bottom: 28px;
+}
+
+.profil-item h2 {
+    color: #064b9b;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.profil-item p {
+    color: #245b8f;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #0872d1;
+    color: white;
+
+    display: flex;
+    justify-content: space-around;
+
+    padding: 18px 8%;
+
+    gap: 30px;
+}
+
+footer div {
+    max-width: 300px;
+}
+
+footer h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+footer p {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* ================================================= */
+/* ==================== HP ========================= */
+/* ================================================= */
+
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 70px;
+
+        padding: 12px 5%;
+
+        flex-direction: row;
+        align-items: center;
+    }
+
+
+    /* LOGO TETAP DI KIRI */
+
+    .logo {
+        text-align: left;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .logo span {
+        font-size: 14px;
+    }
+
+
+    /* HAMBURGER DI KANAN */
+
+    .hamburger {
+        display: block;
+
+        color: #064b9b;
+
+        font-size: 30px;
+        line-height: 1;
+
+        cursor: pointer;
+
+        user-select: none;
+    }
+
+
+    /* MENU HP */
+
+    nav {
+        display: none;
+
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        background: #f5f5df;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        z-index: 1000;
+
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+
+    /* MENU MUNCUL */
+
+    #menu-toggle:checked ~ nav {
+        display: flex;
+    }
+
+
+    /* LINK MENU */
+
+    nav a {
+        display: block;
+
+        padding: 14px 5%;
+
+        border-bottom: 1px solid #ddd;
+
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        background: #e8e8d5;
+    }
+
+
+    /* ================= JUDUL ================= */
+
+    .page-title {
+        padding: 18px 5%;
+    }
+
+    .page-title h1 {
+        font-size: 22px;
+    }
+
+
+    /* ================= PROFIL ================= */
+
+    .profil {
+        flex-direction: column;
+
+        padding: 25px 5%;
+
+        gap: 25px;
+    }
+
+    .profil-image {
+        width: 100%;
+    }
+
+    .profil-image img {
+        height: 250px;
+    }
+
+    .profil-content {
+        width: 100%;
+    }
+
+    .profil-item {
+        margin-bottom: 22px;
+    }
+
+    .profil-item h2 {
+        font-size: 19px;
+    }
+
+    .profil-item p {
+        font-size: 15px;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 20px 5%;
+
+        gap: 18px;
+    }
+
+    footer div {
+        max-width: 100%;
+    }
+
+}

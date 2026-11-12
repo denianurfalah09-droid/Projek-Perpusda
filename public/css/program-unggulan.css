@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    background: #f5f5df;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 8%;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    color: #064b9b;
+    font-size: 22px;
+    margin: 0;
+}
+
+.logo span {
+    color: #064b9b;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #064b9b;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    color: #064b9b;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+}
+
+
+/* =========================
+   JUDUL
+========================= */
+
+.judul-halaman {
+    width: 100%;
+    background: #101e4e;
+    padding: 22px 8%;
+}
+
+.judul-halaman h1 {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   PROGRAM
+========================= */
+
+.program-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.program-image {
+    width: 400px;
+    height: 280px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #eeeeee;
+}
+
+.program-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.program-content {
+    flex: 1;
+}
+
+.program-content h2 {
+    color: #064b9b;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.program-content p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.program-content h3 {
+    color: #064b9b;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.program-content ul {
+    padding-left: 20px;
+    color: #555;
+}
+
+.program-content li {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    width: 100%;
+    background: #101e4e;
+    text-align: center;
+    padding: 18px;
+    margin-top: 20px;
+}
+
+footer p {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+
+    .navbar {
+        padding: 10px 5%;
+    }
+
+    nav {
+        gap: 17px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .judul-halaman {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .program-container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        min-height: 70px;
+        padding: 12px 5%;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logo {
+        text-align: left;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .logo span {
+        font-size: 14px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #f5f5df;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #menu-toggle:checked ~ nav {
+        display: flex;
+    }
+
+    nav a {
+        display: block;
+        padding: 14px 5%;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        background: #e8e8d5;
+    }
+
+    .judul-halaman {
+        padding: 20px 5%;
+    }
+
+    .judul-halaman h1 {
+        font-size: 22px;
+    }
+
+    .program-container {
+        padding: 30px 5%;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .program-image {
+        width: 100%;
+        height: 220px;
+    }
+
+    .program-content h2 {
+        font-size: 20px;
+    }
+
+    .program-content p {
+        font-size: 13px;
+    }
+
+    .program-content h3 {
+        font-size: 17px;
+    }
+
+    .program-content li {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        min-height: 65px;
+        padding: 12px 5%;
+    }
+
+    .logo h2 {
+        font-size: 19px;
+    }
+
+    .logo span {
+        font-size: 13px;
+    }
+
+    .hamburger {
+        font-size: 28px;
+    }
+
+    .judul-halaman {
+        padding: 18px 5%;
+    }
+
+    .judul-halaman h1 {
+        font-size: 20px;
+    }
+
+    .program-container {
+        padding: 25px 5%;
+    }
+
+    .program-image {
+        height: 180px;
+    }
+
+    .program-content h2 {
+        font-size: 18px;
+    }
+
+    .program-content p,
+    .program-content li {
+        font-size: 12px;
+    }
+}

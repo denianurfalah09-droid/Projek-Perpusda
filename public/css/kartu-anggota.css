@@ -1,0 +1,508 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    background: #f5f5df;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 8%;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    color: #064b9b;
+    font-size: 22px;
+    margin: 0;
+}
+
+.logo span {
+    color: #064b9b;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #064b9b;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    color: #064b9b;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+}
+
+
+/* =========================
+   JUDUL HALAMAN
+========================= */
+
+.judul-halaman {
+    width: 100%;
+    background: #101e4e;
+    padding: 22px 8%;
+}
+
+.judul-halaman h1 {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.anggota-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+    margin-bottom: 30px;
+}
+
+.intro h2 {
+    color: #064b9b;
+    font-size: 23px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   PERSYARATAN
+========================= */
+
+.persyaratan {
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    background: #ffffff;
+}
+
+.persyaratan h3 {
+    color: #064b9b;
+    font-size: 19px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.keterangan {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   ITEM SYARAT
+========================= */
+
+.syarat-item {
+    padding: 15px 0;
+    border-top: 1px solid #eeeeee;
+}
+
+.syarat-item:first-of-type {
+    border-top: none;
+}
+
+.syarat-item h4 {
+    color: #064b9b;
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.syarat-item p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   TEMPAT PENDAFTARAN
+========================= */
+
+.tempat-daftar {
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    background: #ffffff;
+}
+
+.tempat-daftar h3 {
+    color: #064b9b;
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.tempat-daftar p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 7px;
+}
+
+.tempat-daftar strong {
+    display: block;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.tempat-daftar .catatan {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
+
+/* =========================
+   GRATIS
+========================= */
+
+.gratis {
+    background: #f5f5df;
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+    padding: 22px 25px;
+    margin-bottom: 20px;
+}
+
+.gratis h3 {
+    color: #064b9b;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.gratis p {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    width: 100%;
+    background: #101e4e;
+    text-align: center;
+    padding: 18px;
+    margin-top: 20px;
+}
+
+footer p {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+
+    .navbar {
+        padding: 10px 5%;
+    }
+
+    nav {
+        gap: 17px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .judul-halaman {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .anggota-container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        min-height: 70px;
+        padding: 12px 5%;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logo {
+        text-align: left;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .logo span {
+        font-size: 14px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #f5f5df;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #menu-toggle:checked ~ nav {
+        display: flex;
+    }
+
+    nav a {
+        display: block;
+        padding: 14px 5%;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        background: #e8e8d5;
+    }
+
+
+    .judul-halaman {
+        padding: 20px 5%;
+    }
+
+    .judul-halaman h1 {
+        font-size: 22px;
+    }
+
+
+    .anggota-container {
+        padding: 30px 5%;
+    }
+
+
+    .intro h2 {
+        font-size: 20px;
+    }
+
+    .intro p {
+        font-size: 13px;
+    }
+
+
+    .persyaratan {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .persyaratan h3 {
+        font-size: 17px;
+    }
+
+    .keterangan {
+        font-size: 13px;
+    }
+
+
+    .syarat-item {
+        padding: 13px 0;
+    }
+
+    .syarat-item h4 {
+        font-size: 15px;
+    }
+
+    .syarat-item p {
+        font-size: 13px;
+    }
+
+
+    .tempat-daftar {
+        padding: 20px;
+    }
+
+    .tempat-daftar h3 {
+        font-size: 17px;
+    }
+
+    .tempat-daftar p {
+        font-size: 13px;
+    }
+
+
+    .gratis {
+        padding: 20px;
+    }
+
+    .gratis h3 {
+        font-size: 17px;
+    }
+
+    .gratis p {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        min-height: 65px;
+        padding: 12px 5%;
+    }
+
+    .logo h2 {
+        font-size: 19px;
+    }
+
+    .logo span {
+        font-size: 13px;
+    }
+
+    .hamburger {
+        font-size: 28px;
+    }
+
+
+    .judul-halaman {
+        padding: 18px 5%;
+    }
+
+    .judul-halaman h1 {
+        font-size: 20px;
+    }
+
+
+    .anggota-container {
+        padding: 25px 5%;
+    }
+
+
+    .intro h2 {
+        font-size: 18px;
+    }
+
+
+    .persyaratan,
+    .tempat-daftar {
+        padding: 17px;
+    }
+
+
+    .persyaratan h3,
+    .tempat-daftar h3,
+    .gratis h3 {
+        font-size: 16px;
+    }
+
+
+    .syarat-item h4 {
+        font-size: 14px;
+    }
+
+    .syarat-item p,
+    .tempat-daftar p,
+    .gratis p {
+        font-size: 12px;
+    }
+
+}

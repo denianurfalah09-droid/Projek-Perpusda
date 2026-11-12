@@ -1,0 +1,201 @@
+/* ==========================================================================
+   PERPUSDA PURWAKARTA - KATEGORI CSS
+   ========================================================================== */
+
+.kategori-hero-banner {
+    background: linear-gradient(135deg, #002d6b 0%, #0048a8 50%, #006bd6 100%);
+    color: white;
+    padding: 3.5rem 0 4rem 0;
+    text-align: center;
+}
+
+.kategori-banner-content {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.kategori-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #bae6fd;
+    margin-bottom: 1rem;
+}
+
+.kategori-breadcrumb a {
+    color: #e0f2fe;
+}
+
+.kategori-breadcrumb a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.kategori-banner-content h1 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.kategori-banner-content p {
+    font-size: 1.05rem;
+    color: #e0f2fe;
+    line-height: 1.6;
+}
+
+/* Kategori List Section */
+.kategori-list-section {
+    padding: 3.5rem 0 5rem 0;
+    background: #f8fafc;
+}
+
+.kategori-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.kategori-section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.kategori-section-header p {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+.btn-view-all-katalog {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0048a8;
+    background: #ebf4ff;
+    padding: 9px 18px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-view-all-katalog:hover {
+    background: #dbeafe;
+}
+
+/* Kategori Cards Grid */
+.kategori-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+}
+
+.kategori-box-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.kategori-box-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px -6px rgba(0, 72, 168, 0.12);
+    border-color: #93c5fd;
+}
+
+.kategori-box-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.kategori-box-icon {
+    font-size: 34px;
+    width: 60px;
+    height: 60px;
+    background: #ebf4ff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kategori-count-badge {
+    background: #f1f5f9;
+    color: #0048a8;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.kategori-box-body {
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.kategori-box-body h3 {
+    font-size: 1.25rem;
+    font-weight: 750;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+.kategori-box-body p {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.55;
+}
+
+.kategori-box-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.view-books-text {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0048a8;
+}
+
+.arrow-circle {
+    width: 32px;
+    height: 32px;
+    background: #ebf4ff;
+    color: #0048a8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.kategori-box-card:hover .arrow-circle {
+    background: #0048a8;
+    color: white;
+    transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .kategori-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .kategori-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
