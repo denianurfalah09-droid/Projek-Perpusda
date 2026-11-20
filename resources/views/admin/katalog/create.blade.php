@@ -191,4 +191,22 @@
     }
 </script>
 
+<style>
+    .form-card .btn-save,
+    .form-card-footer .btn-save {
+        background-color: #064b9b !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .form-card .btn-save:hover,
+    .form-card-footer .btn-save:hover {
+        background-color: #043875 !important;
+    }
+</style>
+
 @endsection

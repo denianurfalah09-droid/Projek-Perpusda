@@ -131,7 +131,7 @@
                         >
 
                         @php
-                            $hasExisting = $buku->gambar && file_exists(public_path('uploads/katalog/' . $buku->gambar));
+                            $hasExisting = !empty($buku->cover_url);
                         @endphp
 
                         <div class="dropzone-idle" id="dropzoneIdle" style="{{ $hasExisting ? 'display: none;' : 'display: flex;' }}">
@@ -145,10 +145,10 @@
 
                         <!-- LIVE PREVIEW CONTAINER -->
                         <div class="dropzone-preview" id="dropzonePreview" style="{{ $hasExisting ? 'display: block;' : 'display: none;' }}">
-                            <img id="imagePreviewImg" src="{{ $hasExisting ? asset('uploads/katalog/' . $buku->gambar) : '#' }}" alt="Pratinjau Sampul" class="preview-img">
+                            <img id="imagePreviewImg" src="{{ $hasExisting ? $buku->cover_url : '#' }}" alt="Pratinjau Sampul" class="preview-img">
                             <div class="preview-overlay">
                                 <label for="gambar" class="btn-change-img">Ganti Foto</label>
-                                <button type="button" class="btn-remove-img" onclick="resetBookImage('{{ $hasExisting ? asset('uploads/katalog/' . $buku->gambar) : '' }}')">Reset</button>
+                                <button type="button" class="btn-remove-img" onclick="resetBookImage('{{ $hasExisting ? $buku->cover_url : '' }}')">Reset</button>
                             </div>
                         </div>
 
@@ -201,5 +201,23 @@
         }
     }
 </script>
+
+<style>
+    .form-card .btn-save,
+    .form-card-footer .btn-save {
+        background-color: #064b9b !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .form-card .btn-save:hover,
+    .form-card-footer .btn-save:hover {
+        background-color: #043875 !important;
+    }
+</style>
 
 @endsection

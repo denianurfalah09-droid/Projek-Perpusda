@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Tambah Layanan')
@@ -11,54 +12,51 @@
 
 <div class="layanan-form">
 
-    <div class="layanan-form-group">
+    <form action="{{ route('admin.layanan.store') }}" method="POST">
+        @csrf
 
-        <label for="nama_layanan">
-            Nama Layanan
-        </label>
+        <div class="layanan-form-group">
+            <label for="nama_layanan">Nama Layanan</label>
 
-        <input
-            type="text"
-            id="nama_layanan"
-            name="nama_layanan"
-            placeholder="Masukan nama layanan"
-        >
+            <input
+                type="text"
+                id="nama_layanan"
+                name="nama_layanan"
+                value="{{ old('nama_layanan') }}"
+                placeholder="Masukan nama layanan"
+                required
+            >
 
-    </div>
+            @error('nama_layanan')
+                <small style="color:red;">{{ $message }}</small>
+            @enderror
+        </div>
 
+        <div class="layanan-form-group">
+            <label for="deskripsi">Deskripsi</label>
 
-    <div class="layanan-form-group">
+            <textarea
+                id="deskripsi"
+                name="deskripsi"
+                placeholder="Masukan deskripsi layanan"
+                required
+            >{{ old('deskripsi') }}</textarea>
 
-        <label for="deskripsi">
-            Deskripsi
-        </label>
+            @error('deskripsi')
+                <small style="color:red;">{{ $message }}</small>
+            @enderror
+        </div>
 
-        <textarea
-            id="deskripsi"
-            name="deskripsi"
-            placeholder="Masukan deskripsi layanan"
-        ></textarea>
+        <div class="layanan-form-actions">
+            <a href="{{ route('admin.layanan') }}" class="layanan-btn-cancel">
+                Batal
+            </a>
 
-    </div>
-
-
-    <div class="layanan-form-actions">
-
-        <a
-            href="{{ route('admin.layanan') }}"
-            class="layanan-btn-cancel"
-        >
-            Batal
-        </a>
-
-        <button
-            type="submit"
-            class="layanan-btn-save"
-        >
-            Simpan
-        </button>
-
-    </div>
+            <button type="submit" class="layanan-btn-save">
+                Simpan
+            </button>
+        </div>
+    </form>
 
 </div>
 

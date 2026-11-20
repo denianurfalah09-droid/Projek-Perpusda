@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Fasilitas')
@@ -9,176 +10,79 @@
     <p>Beranda / Fasilitas</p>
 </div>
 
-<div class="fasilitas-header">
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+
+<div class="fasilitas-header">
     <a href="{{ route('admin.fasilitas.create') }}" class="btn-primary">
         + &nbsp; Tambah Fasilitas
     </a>
-
 </div>
 
 <div class="table-container">
-
     <table class="admin-table fasilitas-table">
-
         <thead>
             <tr>
                 <th>NO</th>
-                <th>Gambar</th>
                 <th>Nama Fasilitas</th>
+                <th>Deskripsi</th>
                 <th>Aksi</th>
             </tr>
         </thead>
 
         <tbody>
+            @forelse($fasilitas as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
 
-            <tr>
-                <td>1</td>
+                    <td>{{ $item->nama_fasilitas }}</td>
 
-                <td>
-                    <div class="fasilitas-image">
-                        <img
-                            src="{{ asset('images/lobby.jpg') }}"
-                            alt="Ruang Lobby"
-                        >
-                    </div>
-                </td>
+                    <td>{{ $item->deskripsi }}</td>
 
-                <td>Ruang lobby</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a
+                                href="{{ route('admin.fasilitas.edit', $item->id_fasilitas) }}"
+                                class="btn-edit"
+                            >
+                                ✎
+                            </a>
 
-                <td>
-                    <div class="action-buttons">
+                            <form
+                                action="{{ route('admin.fasilitas.destroy', $item->id_fasilitas) }}"
+                                method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus fasilitas ini?')"
+                            >
+                                @csrf
+                                @method('DELETE')
 
-                        <a
-                            href="{{ route('admin.fasilitas.edit', 1) }}"
-                            class="btn-edit"
-                        >
-                            ✎
-                        </a>
-
-                        <button
-                            type="button"
-                            class="btn-delete"
-                        >
-                            ●
-                        </button>
-
-                    </div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>2</td>
-
-                <td>
-                    <div class="fasilitas-image">
-                        <img
-                            src="{{ asset('images/anak-anak.jpg') }}"
-                            alt="Ruang Anak"
-                        >
-                    </div>
-                </td>
-
-                <td>Ruang anak</td>
-
-                <td>
-                    <div class="action-buttons">
-
-                        <a
-                            href="{{ route('admin.fasilitas.edit', 2) }}"
-                            class="btn-edit"
-                        >
-                            ✎
-                        </a>
-
-                        <button
-                            type="button"
-                            class="btn-delete"
-                        >
-                            ●
-                        </button>
-
-                    </div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>3</td>
-
-                <td>
-                    <div class="fasilitas-image">
-                        <img
-                            src="{{ asset('images/remaja.jpg') }}"
-                            alt="Ruang Remaja"
-                        >
-                    </div>
-                </td>
-
-                <td>Ruang remaja</td>
-
-                <td>
-                    <div class="action-buttons">
-
-                        <a
-                            href="{{ route('admin.fasilitas.edit', 3) }}"
-                            class="btn-edit"
-                        >
-                            ✎
-                        </a>
-
-                        <button
-                            type="button"
-                            class="btn-delete"
-                        >
-                            ●
-                        </button>
-
-                    </div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>4</td>
-
-                <td>
-                    <div class="fasilitas-image">
-                        <img
-                            src="{{ asset('images/dewasa.jpg') }}"
-                            alt="Ruang Dewasa"
-                        >
-                    </div>
-                </td>
-
-                <td>Ruang dewasa</td>
-
-                <td>
-                    <div class="action-buttons">
-
-                        <a
-                            href="{{ route('admin.fasilitas.edit', 4) }}"
-                            class="btn-edit"
-                        >
-                            ✎
-                        </a>
-
-                        <button
-                            type="button"
-                            class="btn-delete"
-                        >
-                            ●
-                        </button>
-
-                    </div>
-                </td>
-            </tr>
-
+                                <button type="submit" class="btn-action btn-delete" title="Hapus Buku">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" style="text-align:center;">
+                        Belum ada data fasilitas.
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
-
     </table>
-
 </div>
 
 @endsection

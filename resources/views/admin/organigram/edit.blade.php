@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Edit Organigram')
@@ -11,57 +12,94 @@
 
 <div class="organigram-form">
 
-    <div class="organigram-form-group">
+    <form action="{{ route('admin.organigram.update', $organigram->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-        <label for="nama">
-            Nama
-        </label>
+        <div class="organigram-form-group">
 
-        <input
-            type="text"
-            id="nama"
-            name="nama"
-            value="Falah"
-            placeholder="Masukan nama"
-        >
+            <label for="nama">
+                Nama
+            </label>
 
-    </div>
+            <input
+                type="text"
+                id="nama"
+                name="nama"
+                value="{{ old('nama', $organigram->nama) }}"
+                placeholder="Masukan nama"
+            >
 
+            @error('nama')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
 
-    <div class="organigram-form-group">
+        </div>
 
-        <label for="jabatan">
-            Jabatan
-        </label>
+        <div class="organigram-form-group">
 
-        <input
-            type="text"
-            id="jabatan"
-            name="jabatan"
-            value="Kepala Perpustakaan"
-            placeholder="Masukan jabatan"
-        >
+            <label for="jabatan">
+                Jabatan
+            </label>
 
-    </div>
+            <input
+                type="text"
+                id="jabatan"
+                name="jabatan"
+                value="{{ old('jabatan', $organigram->jabatan) }}"
+                placeholder="Masukan jabatan"
+            >
 
+            @error('jabatan')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
 
-    <div class="organigram-form-actions">
+        </div>
 
-        <a
-            href="{{ route('admin.organigram') }}"
-            class="organigram-btn-cancel"
-        >
-            Batal
-        </a>
+        <div class="organigram-form-group">
 
-        <button
-            type="submit"
-            class="organigram-btn-save"
-        >
-            Simpan perubahan
-        </button>
+            <label for="kelompok">
+                Kelompok
+            </label>
 
-    </div>
+            <select id="kelompok" name="kelompok">
+                <option value="">Pilih Kelompok</option>
+
+                @foreach ($kelompokOptions as $kelompok)
+                    <option
+                        value="{{ $kelompok }}"
+                        {{ old('kelompok', $organigram->kelompok) == $kelompok ? 'selected' : '' }}
+                    >
+                        {{ $kelompok }}
+                    </option>
+                @endforeach
+            </select>
+
+            @error('kelompok')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+
+        </div>
+
+        <div class="organigram-form-actions">
+
+            <a
+                href="{{ route('admin.organigram') }}"
+                class="organigram-btn-cancel"
+            >
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="organigram-btn-save"
+            >
+                Simpan perubahan
+            </button>
+
+        </div>
+
+    </form>
 
 </div>
 

@@ -72,8 +72,8 @@
                         <td class="text-center font-medium">{{ ($buku->currentPage() - 1) * $buku->perPage() + $index + 1 }}</td>
                         <td>
                             <div class="buku-cover-wrapper">
-                                @if ($item->gambar && file_exists(public_path('uploads/katalog/' . $item->gambar)))
-                                    <img src="{{ asset('uploads/katalog/' . $item->gambar) }}" alt="{{ $item->judul }}" class="buku-cover-img" loading="lazy">
+                                @if ($item->cover_url)
+                                    <img src="{{ $item->cover_url }}" alt="{{ $item->judul }}" class="buku-cover-img" loading="lazy">
                                 @else
                                     <div class="buku-cover-placeholder">
                                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>

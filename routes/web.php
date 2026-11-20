@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\OrganigramController;
 use App\Http\Controllers\AuthController;
 use App\Models\Katalog;
 use App\Models\Kategori;
+use App\Models\Organigram;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,14 @@ Route::get('/', function () {
         });
     }
 
-    return view('beranda', compact('featuredBooks', 'totalBuku', 'totalKategori', 'categories'));
+    $latestNews = collect([]);
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('berita')) {
+            $latestNews = \App\Models\Berita::orderBy('tanggal', 'desc')->take(3)->get();
+        }
+    } catch (\Throwable $e) {}
+
+    return view('beranda', compact('featuredBooks', 'totalBuku', 'totalKategori', 'categories', 'latestNews'));
 })->name('beranda');
 
 Route::get('/profil', function () {
@@ -68,8 +76,10 @@ Route::get('/profil', function () {
 })->name('profil');
 
 Route::get('/berita', function () {
-    return view('berita');
-})->name('berita');
+    $berita = \App\Models\Berita::orderBy('tanggal', 'desc')->get();
+
+    return view('berita', compact('berita'));
+})->name('berita'); 
 
 Route::get('/kategori-buku', function () {
     $categories = collect([]);
@@ -139,7 +149,9 @@ Route::get('/katalog', function (Request $request) {
 })->name('katalog');
 
 Route::get('/layanan', function () {
-    return view('layanan');
+    $layanan = \App\Models\Layanan::orderBy('id_layanan', 'asc')->get();
+
+    return view('layanan', compact('layanan'));
 })->name('layanan');
 
 Route::get('/kartu-anggota', function () {
@@ -150,12 +162,28 @@ Route::get('/program-unggulan', function () {
     return view('program-unggulan');
 })->name('program.unggulan');
 
-Route::get('/fasilitas', function () { 
-    return view('fasilitas');
+Route::get('/fasilitas', function () {
+    $fasilitas = \App\Models\Fasilitas::orderBy('id_fasilitas', 'asc')->get();
+
+    return view('fasilitas', compact('fasilitas'));
 })->name('fasilitas');
 
-Route::get('/organigram', function () { 
-    return view('struktur-organigram');
+Route::get('/organigram', function () {
+
+    $organigram = Organigram::orderBy('id', 'asc')->get();
+
+    $kelompokOptions = [
+        'Pimpinan',
+        'Sekretariat',
+        'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan',
+        'Bidang Pengelolaan dan Pemeliharaan Kearsipan',
+        'Bidang Layanan dan Otomasi Perpustakaan',
+        'Bidang Pengembangan dan Pelestarian Perpustakaan',
+        'Bale Panyawangan Diorama',
+    ];
+
+    return view('struktur-organigram', compact('organigram', 'kelompokOptions'));
+
 })->name('organigram');
 
 
@@ -183,6 +211,7 @@ Route::post('/profil', [ProfilController::class, 'update'])->name('profil.update
 Route::post('/profil/password', [ProfilController::class, 'updatePassword'])->name('profil.password');
 
     // 3. Berita CRUD
+    Route::post('/berita/preview', [BeritaController::class, 'preview'])->name('berita.preview');
     Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
     Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
     Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');

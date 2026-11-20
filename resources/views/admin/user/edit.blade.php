@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Edit User')
@@ -9,76 +10,89 @@
     <p>Beranda / User / Edit User</p>
 </div>
 
-<div class="user-form">
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 
-    <div class="user-form-group">
+<form
+    action="{{ route('admin.user.update', $user->id) }}"
+    method="POST"
+>
+    @csrf
+    @method('PUT')
 
-        <label for="username">
-            Username
-        </label>
+    <div class="user-form">
 
-        <input
-            type="text"
-            id="username"
-            name="username"
-            value="admin"
-            placeholder="Masukan username"
-        >
+        <div class="user-form-group">
+
+            <label for="name">Username</label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ old('name', $user->name) }}"
+                placeholder="Masukkan username"
+                required
+            >
+
+        </div>
+
+        <div class="user-form-group">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ old('email', $user->email) }}"
+                placeholder="Masukkan email"
+                required
+            >
+
+        </div>
+
+        <div class="user-form-group">
+
+            <label for="password">Password Baru</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Kosongkan jika tidak ingin mengganti password"
+            >
+
+            <small>
+                Password hanya perlu diisi jika ingin menggantinya.
+            </small>
+
+        </div>
+
+        <div class="user-form-actions">
+
+            <a
+                href="{{ route('admin.user') }}"
+                class="user-btn-cancel"
+            >
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="user-btn-save"
+            >
+                Simpan Perubahan
+            </button>
+
+        </div>
 
     </div>
-
-
-    <div class="user-form-group">
-
-        <label for="email">
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="email"
-            name="email"
-            value="admin@perpusda.id"
-            placeholder="Masukan email"
-        >
-
-    </div>
-
-
-    <div class="user-form-group">
-
-        <label for="password">
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Masukan password baru"
-        >
-
-    </div>
-
-
-    <div class="user-form-actions">
-
-        <a
-            href="{{ route('admin.user') }}"
-            class="user-btn-cancel"
-        >
-            Batal
-        </a>
-
-        <button
-            type="submit"
-            class="user-btn-save"
-        >
-            Simpan perubahan
-        </button>
-
-    </div>
-
-</div>
+</form>
 
 @endsection

@@ -53,39 +53,43 @@
 <section class="layanan-wrap-section">
     <div class="site-container">
         <div class="layanan-grid">
-            <!-- JAM OPERASIONAL -->
-            <div class="layanan-card">
-                <div class="layanan-icon">🕐</div>
-                <div class="layanan-content">
-                    <h2>Jam Operasional</h2>
-                    <div class="garis"></div>
-                    <p><strong>Senin - Kamis:</strong><br>08.00 - 15.30 WIB</p>
-                    <p><strong>Jum'at:</strong><br>08.00 - 15.00 WIB</p>
-                    <p><strong>Sabtu:</strong><br>08.30 - 12.00 WIB</p>
+            @forelse($layanan as $item)
+                @php
+                    $icons = ['📖', '📚', '⭐', '🕐', '👤', '🔖', '🏛️', '💻'];
+                    $icon = '📖';
+                    $lower = strtolower($item->nama_layanan);
+                    if (str_contains($lower, 'jam') || str_contains($lower, 'waktu') || str_contains($lower, 'operasional')) {
+                        $icon = '🕐';
+                    } elseif (str_contains($lower, 'anggota') || str_contains($lower, 'kartu') || str_contains($lower, 'member')) {
+                        $icon = '👤';
+                    } elseif (str_contains($lower, 'program') || str_contains($lower, 'unggulan') || str_contains($lower, 'keliling')) {
+                        $icon = '⭐';
+                    } elseif (str_contains($lower, 'komputer') || str_contains($lower, 'internet') || str_contains($lower, 'digital')) {
+                        $icon = '💻';
+                    } elseif (str_contains($lower, 'buku') || str_contains($lower, 'koleksi') || str_contains($lower, 'baca')) {
+                        $icon = '📚';
+                    } else {
+                        $icon = $icons[$loop->index % count($icons)];
+                    }
+                @endphp
+                <div class="layanan-card">
+                    <div class="layanan-icon">{{ $icon }}</div>
+                    <div class="layanan-content">
+                        <h2>{{ $item->nama_layanan }}</h2>
+                        <div class="garis"></div>
+                        <p>{!! nl2br(e($item->deskripsi)) !!}</p>
+                        @if(str_contains($lower, 'kartu') || str_contains($lower, 'anggota'))
+                            <a href="{{ route('kartu.anggota') }}" style="display:inline-block; margin-top:10px; color:#0048a8; font-weight:700;">Lihat Persyaratan &rarr;</a>
+                        @elseif(str_contains($lower, 'program'))
+                            <a href="{{ route('program.unggulan') }}" style="display:inline-block; margin-top:10px; color:#0048a8; font-weight:700;">Lihat Program &rarr;</a>
+                        @endif
+                    </div>
                 </div>
-            </div>
-
-            <!-- KARTU ANGGOTA -->
-            <div class="layanan-card">
-                <div class="layanan-icon">👤</div>
-                <div class="layanan-content">
-                    <h2>Kartu Anggota</h2>
-                    <div class="garis"></div>
-                    <p>Dapatkan kemudahan akses peminjaman buku fisik dengan mendaftarkan diri menjadi anggota resmi Perpusda Purwakarta.</p>
-                    <a href="{{ route('kartu.anggota') }}" style="display:inline-block; margin-top:10px; color:#0048a8; font-weight:700;">Lihat Persyaratan &rarr;</a>
-                </div>
-            </div>
-
-            <!-- PROGRAM UNGGULAN -->
-            <div class="layanan-card">
-                <div class="layanan-icon">⭐</div>
-                <div class="layanan-content">
-                    <h2>Program Unggulan</h2>
-                    <div class="garis"></div>
-                    <p>Program literasi jemput bola melalui armada mobil perpustakaan keliling yang menjangkau seluruh kecamatan dan desa.</p>
-                    <a href="{{ route('program.unggulan') }}" style="display:inline-block; margin-top:10px; color:#0048a8; font-weight:700;">Lihat Program &rarr;</a>
-                </div>
-            </div>
+            @empty
+                <p style="text-align:center; grid-column: 1 / -1; color:#64748b; padding: 3rem 0;">
+                    Belum ada data layanan yang tersedia.
+                </p>
+            @endforelse
         </div>
     </div>
 </section>

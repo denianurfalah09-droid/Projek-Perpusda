@@ -6,11 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Organigram;
 use App\Models\Aktivitas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OrganigramController extends Controller
 {
+    private function kelompokOptions()
+    {
+        return [
+            'Pimpinan',
+            'Sekretariat',
+            'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan',
+            'Bidang Pengelolaan dan Pemeliharaan Kearsipan',
+            'Bidang Layanan dan Otomasi Perpustakaan',
+            'Bidang Pengembangan dan Pelestarian Perpustakaan',
+            'Bale Panyawangan Diorama',
+        ];
+    }
+
     /**
-     * Tampilkan struktur organigram
+     * Tampilkan daftar organigram
      */
     public function index()
     {
@@ -20,37 +34,43 @@ class OrganigramController extends Controller
     }
 
     /**
-     * Form tambah pengurus organigram
+     * Form tambah pengurus
      */
     public function create()
     {
-        return view('admin.organigram.create');
+        $kelompokOptions = $this->kelompokOptions();
+
+        return view('admin.organigram.create', compact('kelompokOptions'));
     }
 
     /**
-     * Simpan pengurus baru ke database
+     * Simpan pengurus baru
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama'    => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
+            'kelompok' => [
+                'required',
+                'string',
+                Rule::in($this->kelompokOptions()),
+            ],
         ], [
-            'nama.required'    => 'Nama pengurus wajib diisi.',
+            'nama.required' => 'Nama pengurus wajib diisi.',
             'jabatan.required' => 'Jabatan pengurus wajib diisi.',
+            'kelompok.required' => 'Kelompok organigram wajib dipilih.',
+            'kelompok.in' => 'Kelompok organigram tidak valid.',
         ]);
 
-        $organigram = Organigram::create([
-            'nama'    => $request->nama,
-            'jabatan' => $request->jabatan,
-        ]);
+        $organigram = Organigram::create($validated);
 
         try {
             Aktivitas::create([
-                'judul'     => 'Penambahan Struktur Organigram',
+                'judul' => 'Penambahan Struktur Organigram',
                 'deskripsi' => 'Pengurus baru ditambahkan: ' . $organigram->nama . ' (' . $organigram->jabatan . ')',
-                'tipe'      => 'organigram',
-                'icon'      => 'plus',
+                'tipe' => 'organigram',
+                'icon' => 'plus',
             ]);
         } catch (\Throwable $e) {}
 
@@ -60,41 +80,46 @@ class OrganigramController extends Controller
     }
 
     /**
-     * Form edit pengurus organigram
+     * Form edit pengurus
      */
     public function edit($id)
     {
         $organigram = Organigram::findOrFail($id);
+        $kelompokOptions = $this->kelompokOptions();
 
-        return view('admin.organigram.edit', compact('organigram'));
+        return view('admin.organigram.edit', compact('organigram', 'kelompokOptions'));
     }
 
     /**
-     * Perbarui data pengurus organigram
+     * Perbarui data pengurus
      */
     public function update(Request $request, $id)
     {
         $organigram = Organigram::findOrFail($id);
 
-        $request->validate([
-            'nama'    => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
+            'kelompok' => [
+                'required',
+                'string',
+                Rule::in($this->kelompokOptions()),
+            ],
         ], [
-            'nama.required'    => 'Nama pengurus wajib diisi.',
+            'nama.required' => 'Nama pengurus wajib diisi.',
             'jabatan.required' => 'Jabatan pengurus wajib diisi.',
+            'kelompok.required' => 'Kelompok organigram wajib dipilih.',
+            'kelompok.in' => 'Kelompok organigram tidak valid.',
         ]);
 
-        $organigram->update([
-            'nama'    => $request->nama,
-            'jabatan' => $request->jabatan,
-        ]);
+        $organigram->update($validated);
 
         try {
             Aktivitas::create([
-                'judul'     => 'Pembaruan Struktur Organigram',
+                'judul' => 'Pembaruan Struktur Organigram',
                 'deskripsi' => 'Data pengurus diperbarui: ' . $organigram->nama,
-                'tipe'      => 'organigram',
-                'icon'      => 'edit',
+                'tipe' => 'organigram',
+                'icon' => 'edit',
             ]);
         } catch (\Throwable $e) {}
 
@@ -104,20 +129,21 @@ class OrganigramController extends Controller
     }
 
     /**
-     * Hapus pengurus organigram dari database
+     * Hapus pengurus
      */
     public function destroy($id)
     {
         $organigram = Organigram::findOrFail($id);
         $nama = $organigram->nama;
+
         $organigram->delete();
 
         try {
             Aktivitas::create([
-                'judul'     => 'Penghapusan Struktur Organigram',
+                'judul' => 'Penghapusan Struktur Organigram',
                 'deskripsi' => 'Pengurus organigram dihapus: ' . $nama,
-                'tipe'      => 'organigram',
-                'icon'      => 'trash',
+                'tipe' => 'organigram',
+                'icon' => 'trash',
             ]);
         } catch (\Throwable $e) {}
 
@@ -126,4 +152,3 @@ class OrganigramController extends Controller
             ->with('success', 'Pengurus "' . $nama . '" berhasil dihapus dari organigram.');
     }
 }
-

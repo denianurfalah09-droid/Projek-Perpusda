@@ -33,11 +33,7 @@
     padding: 4rem 0 5rem 0;
     background: #f8fafc;
 }
-.berita-cards-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
+
 @media (max-width: 992px) {
     .berita-cards-container { grid-template-columns: repeat(2, 1fr); }
 }
@@ -64,41 +60,58 @@
 <section class="berita-main-wrap">
     <div class="site-container">
         <div class="berita-cards-container">
-            <!-- BERITA 1 -->
-            <a href="https://disipusda.purwakartakab.go.id/perpustakaan-daerah-kabupaten-purwakarta/" target="_blank" rel="noopener" class="berita-card">
-                <div class="berita-image">
-                    <img src="{{ asset('images/berita1.jpg') }}" alt="Kegiatan Perpustakaan Daerah Purwakarta">
-                </div>
-                <div class="berita-content">
-                    <h2>Kegiatan Perpustakaan Daerah Purwakarta</h2>
-                    <p>Informasi terbaru mengenai ragam kegiatan literasi edukatif dan layanan pembinaan minat baca di Perpustakaan Daerah Kabupaten Purwakarta.</p>
-                    <small>📅 10 Agustus 2026</small>
-                </div>
-            </a>
+            @forelse ($berita as $item)
+                <a href="{{ $item->link }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="berita-card">
 
-            <!-- BERITA 2 -->
-            <a href="https://lppl.purwakartakab.go.id/berita-purwakarta/perkuat-budaya-literasi-masyarakat-perpustakaan-purwakarta-siapkan-ribuan-koleksi-buku/" target="_blank" rel="noopener" class="berita-card">
-                <div class="berita-image">
-                    <img src="{{ asset('images/berita2.webp') }}" alt="Program Literasi Perpustakaan">
-                </div>
-                <div class="berita-content">
-                    <h2>Perkuat Budaya Literasi, Siapkan Ribuan Koleksi Buku</h2>
-                    <p>Perpustakaan Daerah Purwakarta terus menambah koleksi buku berkualitas guna mendorong antusiasme membaca generasi muda.</p>
-                    <small>📅 5 Agustus 2026</small>
-                </div>
-            </a>
+                    <div class="berita-image">
+                        @if ($item->gambar && \Illuminate\Support\Str::startsWith($item->gambar, ['http://', 'https://']))
+                            <img
+                                src="{{ $item->gambar }}"
+                                alt="{{ $item->judul }}"
+                            >
+                        @elseif ($item->gambar && file_exists(public_path('storage/' . $item->gambar)))
+                            <img
+                                src="{{ asset('storage/' . $item->gambar) }}"
+                                alt="{{ $item->judul }}"
+                            >
+                        @elseif ($item->gambar && file_exists(public_path('images/' . $item->gambar)))
+                            <img
+                                src="{{ asset('images/' . $item->gambar) }}"
+                                alt="{{ $item->judul }}"
+                            >
+                        @elseif ($item->gambar)
+                            <img
+                                src="{{ asset('storage/' . $item->gambar) }}"
+                                alt="{{ $item->judul }}"
+                            >
+                        @else
+                            <img
+                                src="{{ asset('images/berita1.jpg') }}"
+                                alt="{{ $item->judul }}"
+                            >
+                        @endif
+                    </div>
 
-            <!-- BERITA 3 -->
-            <a href="https://disipusda.purwakartakab.go.id/" target="_blank" rel="noopener" class="berita-card">
-                <div class="berita-image">
-                    <img src="{{ asset('images/berita3.jpeg') }}" alt="Informasi Layanan Perpustakaan">
-                </div>
-                <div class="berita-content">
-                    <h2>Peningkatan Kualitas Fasilitas Ruang Baca & Digital</h2>
-                    <p>Simak pembaruan fasilitas komputer penelusuran OPAC, ruang ramah anak, dan internet WiFi gratis bagi seluruh pemustaka.</p>
-                    <small>📅 1 Agustus 2026</small>
-                </div>
-            </a>
+                    <div class="berita-content">
+                        <h2>{{ $item->judul }}</h2>
+
+                        <p>
+                            {{ $item->deskripsi ?? 'Baca informasi selengkapnya melalui tautan berita.' }}
+                        </p>
+
+                        <small>
+                            📅 {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}
+                        </small>
+                    </div>
+                </a>
+            @empty
+                <p class="berita-empty" style="grid-column: 1 / -1; text-align: center; color: #64748b; padding: 3rem 0;">
+                    Belum ada berita yang tersedia.
+                </p>
+            @endforelse
         </div>
     </div>
 </section>

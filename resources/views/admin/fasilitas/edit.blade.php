@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Edit Fasilitas')
@@ -9,80 +10,68 @@
     <p>Beranda / Fasilitas / Edit Fasilitas</p>
 </div>
 
-<div class="fasilitas-form">
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 
-    <div class="fasilitas-form-group">
+<form
+    action="{{ route('admin.fasilitas.update', $fasilitas->id_fasilitas) }}"
+    method="POST"
+>
+    @csrf
+    @method('PUT')
 
-        <label for="nama_fasilitas">
-            Nama Fasilitas
-        </label>
+    <div class="fasilitas-form">
 
-        <input
-            type="text"
-            id="nama_fasilitas"
-            name="nama_fasilitas"
-            value="Ruang lobby"
-            placeholder="Masukan nama fasilitas"
-        >
+        <div class="fasilitas-form-group">
+            <label for="nama_fasilitas">
+                Nama Fasilitas
+            </label>
+
+            <input
+                type="text"
+                id="nama_fasilitas"
+                name="nama_fasilitas"
+                value="{{ old('nama_fasilitas', $fasilitas->nama_fasilitas) }}"
+                placeholder="Masukkan nama fasilitas"
+                required
+            >
+        </div>
+
+        <div class="fasilitas-form-group">
+            <label for="deskripsi">
+                Deskripsi
+            </label>
+
+            <textarea
+                id="deskripsi"
+                name="deskripsi"
+                placeholder="Masukkan deskripsi fasilitas"
+                required
+            >{{ old('deskripsi', $fasilitas->deskripsi) }}</textarea>
+        </div>
+
+        <div class="fasilitas-form-actions">
+            <a
+                href="{{ route('admin.fasilitas') }}"
+                class="fasilitas-btn-cancel"
+            >
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="fasilitas-btn-save"
+            >
+                Simpan Perubahan
+            </button>
+        </div>
 
     </div>
-
-
-    <div class="fasilitas-form-group">
-
-        <label for="deskripsi">
-            Isi Profil
-        </label>
-
-        <textarea
-            id="deskripsi"
-            name="deskripsi"
-            placeholder="Masukan isi profil fasilitas"
-        >Ruang lobby perpustakaan sebagai area penerima pengunjung.</textarea>
-
-    </div>
-
-
-    <div class="fasilitas-form-group fasilitas-upload">
-
-        <label for="gambar">
-            Gambar
-        </label>
-
-        <input
-            type="file"
-            id="gambar"
-            name="gambar"
-        >
-
-        <label
-            for="gambar"
-            class="choose-image"
-        >
-            Pilih gambar
-        </label>
-
-    </div>
-
-
-    <div class="fasilitas-form-actions">
-
-        <a
-            href="{{ route('admin.fasilitas') }}"
-            class="fasilitas-btn-cancel"
-        >
-            Batal
-        </a>
-
-        <button
-            type="submit"
-            class="fasilitas-btn-save"
-        >
-            Simpan perubahan
-        </button>
-
-    </div>
-
-</div>
+</form>
 
 @endsection

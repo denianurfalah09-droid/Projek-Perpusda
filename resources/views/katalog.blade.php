@@ -95,8 +95,11 @@
             @forelse ($buku as $item)
                 <div class="catalog-book-card">
                     <div class="book-card-cover-wrapper">
-                        @if ($item->gambar && file_exists(public_path('uploads/katalog/' . $item->gambar)))
-                            <img src="{{ asset('uploads/katalog/' . $item->gambar) }}" alt="{{ $item->judul }}" class="catalog-cover-img" loading="lazy">
+                        @if ($item->cover_url)
+                            <img src="{{ $item->cover_url }}"
+                                alt="{{ $item->judul }}"
+                                class="catalog-cover-img"
+                                loading="lazy">
                         @else
                             <div class="catalog-cover-fallback">
                                 <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

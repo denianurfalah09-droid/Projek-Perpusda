@@ -143,11 +143,20 @@ class KatalogController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($buku->gambar && Storage::disk('public')->exists($buku->gambar)) {
-                Storage::disk('public')->delete($buku->gambar);
-            }
-            if ($buku->gambar && file_exists(public_path('uploads/katalog/' . $buku->gambar))) {
-                @unlink(public_path('uploads/katalog/' . $buku->gambar));
+            if ($buku->gambar) {
+                $isShared = Katalog::where('gambar', $buku->gambar)->where('id', '!=', $buku->id)->exists();
+                if (!$isShared) {
+                    if (Storage::disk('public')->exists($buku->gambar)) {
+                        Storage::disk('public')->delete($buku->gambar);
+                    }
+                    if (file_exists(public_path('uploads/katalog/' . $buku->gambar))) {
+                        @unlink(public_path('uploads/katalog/' . $buku->gambar));
+                    }
+                    $rawBasename = basename($buku->gambar);
+                    if (file_exists(public_path('uploads/katalog/' . $rawBasename))) {
+                        @unlink(public_path('uploads/katalog/' . $rawBasename));
+                    }
+                }
             }
             $data['gambar'] = $request->file('gambar')->store('katalog', 'public');
         }
@@ -176,11 +185,18 @@ class KatalogController extends Controller
         $buku = Katalog::findOrFail($id);
 
         if ($buku->gambar) {
-            if (Storage::disk('public')->exists($buku->gambar)) {
-                Storage::disk('public')->delete($buku->gambar);
-            }
-            if (file_exists(public_path('uploads/katalog/' . $buku->gambar))) {
-                @unlink(public_path('uploads/katalog/' . $buku->gambar));
+            $isShared = Katalog::where('gambar', $buku->gambar)->where('id', '!=', $buku->id)->exists();
+            if (!$isShared) {
+                if (Storage::disk('public')->exists($buku->gambar)) {
+                    Storage::disk('public')->delete($buku->gambar);
+                }
+                if (file_exists(public_path('uploads/katalog/' . $buku->gambar))) {
+                    @unlink(public_path('uploads/katalog/' . $buku->gambar));
+                }
+                $rawBasename = basename($buku->gambar);
+                if (file_exists(public_path('uploads/katalog/' . $rawBasename))) {
+                    @unlink(public_path('uploads/katalog/' . $rawBasename));
+                }
             }
         }
 

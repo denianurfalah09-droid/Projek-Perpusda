@@ -143,7 +143,7 @@
         <div class="about-grid">
             <div class="about-image-col scroll-reveal">
                 <div class="about-image-frame">
-                    <img src="{{ asset('images/profil.jpg') }}" alt="Gedung Perpusda Purwakarta" class="about-img">
+                    <img src="{{ asset('images/layanan disipusda.jpeg') }}" alt="Gedung Perpusda Purwakarta" class="about-img">
                     <div class="about-badge-exp">
                         <span class="exp-number">Purwakarta</span>
                         <span class="exp-text">Istimewa & Berbudaya</span>
@@ -245,8 +245,8 @@
             @forelse ($featuredBooks as $buku)
                 <div class="home-book-card scroll-reveal">
                     <div class="book-cover-area">
-                        @if ($buku->gambar && file_exists(public_path('uploads/katalog/' . $buku->gambar)))
-                            <img src="{{ asset('uploads/katalog/' . $buku->gambar) }}" alt="{{ $buku->judul }}" class="book-img" loading="lazy">
+                        @if ($buku->cover_url)
+                            <img src="{{ $buku->cover_url }}" alt="{{ $buku->judul }}" class="book-img" loading="lazy">
                         @else
                             <div class="book-cover-fallback">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -366,44 +366,71 @@
         </div>
 
         <div class="news-grid">
-            <article class="news-card scroll-reveal">
-                <div class="news-img-wrapper">
-                    <img src="{{ asset('images/berita1.jpg') }}" alt="Kegiatan Literasi Anak" loading="lazy">
-                    <span class="news-category-badge">Edukasi</span>
-                </div>
-                <div class="news-content">
-                    <span class="news-date">📅 10 September 2024</span>
-                    <h3 class="news-title">Peningkatan Minat Baca Generasi Muda Purwakarta Melalui Festival Literasi Daerah</h3>
-                    <p class="news-excerpt">Disarpusda Purwakarta menggelar festival literasi daerah yang disambut antusias ratusan pelajar dari berbagai sekolah...</p>
-                    <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                </div>
-            </article>
+            @if(isset($latestNews) && $latestNews->isNotEmpty())
+                @foreach($latestNews as $item)
+                    <article class="news-card scroll-reveal">
+                        <div class="news-img-wrapper">
+                            @if ($item->gambar && \Illuminate\Support\Str::startsWith($item->gambar, ['http://', 'https://']))
+                                <img src="{{ $item->gambar }}" alt="{{ $item->judul }}" loading="lazy">
+                            @elseif ($item->gambar && file_exists(public_path('storage/' . $item->gambar)))
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" loading="lazy">
+                            @elseif ($item->gambar && file_exists(public_path('images/' . $item->gambar)))
+                                <img src="{{ asset('images/' . $item->gambar) }}" alt="{{ $item->judul }}" loading="lazy">
+                            @elseif ($item->gambar)
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" loading="lazy">
+                            @else
+                                <img src="{{ asset('images/berita1.jpg') }}" alt="{{ $item->judul }}" loading="lazy">
+                            @endif
+                            <span class="news-category-badge">Warta</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-date">📅 {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</span>
+                            <h3 class="news-title">{{ $item->judul }}</h3>
+                            <p class="news-excerpt">{{ \Illuminate\Support\Str::limit($item->deskripsi ?? 'Baca informasi selengkapnya melalui tautan berita.', 120) }}</p>
+                            <a href="{{ $item->link ?? route('berita') }}" target="_blank" rel="noopener" class="news-read-more">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    </article>
+                @endforeach
+            @else
+                <article class="news-card scroll-reveal">
+                    <div class="news-img-wrapper">
+                        <img src="{{ asset('images/berita1.jpg') }}" alt="Kegiatan Literasi Anak" loading="lazy">
+                        <span class="news-category-badge">Edukasi</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">📅 10 September 2024</span>
+                        <h3 class="news-title">Peningkatan Minat Baca Generasi Muda Purwakarta Melalui Festival Literasi Daerah</h3>
+                        <p class="news-excerpt">Disarpusda Purwakarta menggelar festival literasi daerah yang disambut antusias ratusan pelajar dari berbagai sekolah...</p>
+                        <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
 
-            <article class="news-card scroll-reveal">
-                <div class="news-img-wrapper">
-                    <img src="{{ asset('images/berita2.webp') }}" alt="Perpustakaan Keliling" loading="lazy">
-                    <span class="news-category-badge">Layanan</span>
-                </div>
-                <div class="news-content">
-                    <span class="news-date">📅 05 September 2024</span>
-                    <h3 class="news-title">Mobil Perpustakaan Keliling Sambangi Sekolah di Wilayah Pedesaan Purwakarta</h3>
-                    <p class="news-excerpt">Program jemput bola perpustakaan keliling terus digalakkan guna menjamin pemerataan akses bacaan bermutu bagi anak-anak...</p>
-                    <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                </div>
-            </article>
+                <article class="news-card scroll-reveal">
+                    <div class="news-img-wrapper">
+                        <img src="{{ asset('images/berita2.webp') }}" alt="Perpustakaan Keliling" loading="lazy">
+                        <span class="news-category-badge">Layanan</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">📅 05 September 2024</span>
+                        <h3 class="news-title">Mobil Perpustakaan Keliling Sambangi Sekolah di Wilayah Pedesaan Purwakarta</h3>
+                        <p class="news-excerpt">Program jemput bola perpustakaan keliling terus digalakkan guna menjamin pemerataan akses bacaan bermutu bagi anak-anak...</p>
+                        <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
 
-            <article class="news-card scroll-reveal">
-                <div class="news-img-wrapper">
-                    <img src="{{ asset('images/berita3.jpeg') }}" alt="Bedah Buku Purwakarta" loading="lazy">
-                    <span class="news-category-badge">Kegiatan</span>
-                </div>
-                <div class="news-content">
-                    <span class="news-date">📅 28 Agustus 2024</span>
-                    <h3 class="news-title">Bedah Buku Sejarah Purwakarta: Merawat Ingatan Kolektif dan Warisan Budaya</h3>
-                    <p class="news-excerpt">Diskusi hangat bedah buku sejarah menghadirkan sejarawan lokal dan budayawan Purwakarta untuk mengupas tuntas asal-usul kota...</p>
-                    <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
-                </div>
-            </article>
+                <article class="news-card scroll-reveal">
+                    <div class="news-img-wrapper">
+                        <img src="{{ asset('images/berita3.jpeg') }}" alt="Bedah Buku Purwakarta" loading="lazy">
+                        <span class="news-category-badge">Kegiatan</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">📅 28 Agustus 2024</span>
+                        <h3 class="news-title">Bedah Buku Sejarah Purwakarta: Merawat Ingatan Kolektif dan Warisan Budaya</h3>
+                        <p class="news-excerpt">Diskusi hangat bedah buku sejarah menghadirkan sejarawan lokal dan budayawan Purwakarta untuk mengupas tuntas asal-usul kota...</p>
+                        <a href="{{ route('berita') }}" class="news-read-more">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
+            @endif
         </div>
     </div>
 </section>

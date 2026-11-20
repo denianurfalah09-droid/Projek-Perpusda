@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Tambah User')
@@ -9,74 +10,85 @@
     <p>Beranda / User / Tambah User</p>
 </div>
 
-<div class="user-form">
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 
-    <div class="user-form-group">
+<form
+    action="{{ route('admin.user.store') }}"
+    method="POST"
+>
+    @csrf
 
-        <label for="username">
-            Username
-        </label>
+    <div class="user-form">
 
-        <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Masukan username"
-        >
+        <div class="user-form-group">
+
+            <label for="name">Username</label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ old('name') }}"
+                placeholder="Masukkan username"
+                required
+            >
+
+        </div>
+
+        <div class="user-form-group">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ old('email') }}"
+                placeholder="Masukkan email"
+                required
+            >
+
+        </div>
+
+        <div class="user-form-group">
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Masukkan password"
+                required
+            >
+
+        </div>
+
+        <div class="user-form-actions">
+
+            <a
+                href="{{ route('admin.user') }}"
+                class="user-btn-cancel"
+            >
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="user-btn-save"
+            >
+                Simpan
+            </button>
+
+        </div>
 
     </div>
-
-
-    <div class="user-form-group">
-
-        <label for="email">
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Masukan email"
-        >
-
-    </div>
-
-
-    <div class="user-form-group">
-
-        <label for="password">
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Masukan password"
-        >
-
-    </div>
-
-
-    <div class="user-form-actions">
-
-        <a
-            href="{{ route('admin.user') }}"
-            class="user-btn-cancel"
-        >
-            Batal
-        </a>
-
-        <button
-            type="submit"
-            class="user-btn-save"
-        >
-            Simpan
-        </button>
-
-    </div>
-
-</div>
+</form>
 
 @endsection

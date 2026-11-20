@@ -65,8 +65,9 @@
                             type="text"
                             id="username"
                             name="username"
-                            value="{{ old('username', 'admin@perpusda.purwakarta.go.id') }}"
-                            placeholder="admin@perpusda.purwakarta.go.id"
+                            value="{{ old('username') }}"
+                            placeholder="Masukkan email atau username"
+                            autocomplete="off"
                             required
                             autofocus
                         >
@@ -87,8 +88,8 @@
                             type="password"
                             id="password"
                             name="password"
-                            value="admin123"
                             placeholder="Masukkan password admin"
+                            autocomplete="new-password"
                             required
                         >
                         <button type="button" class="btn-toggle-pwd" id="togglePwdBtn" aria-label="Lihat password">
@@ -115,14 +116,6 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
             </form>
-
-            <div class="login-hint-box">
-                <div class="hint-title">💡 Akun Akses Awal:</div>
-                <div class="hint-details">
-                    <div>Email: <code>admin@perpusda.purwakarta.go.id</code></div>
-                    <div>Password: <code>admin123</code></div>
-                </div>
-            </div>
 
             <div class="login-card-footer">
                 <a href="{{ route('beranda') }}" class="back-link">

@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 
 @section('title', 'Tambah Organigram')
@@ -11,55 +12,80 @@
 
 <div class="organigram-form">
 
-    <div class="organigram-form-group">
+    <form action="{{ route('admin.organigram.store') }}" method="POST">
+        @csrf
 
-        <label for="nama">
-            Nama
-        </label>
+        <div class="organigram-form-group">
+            <label for="nama">Nama</label>
 
-        <input
-            type="text"
-            id="nama"
-            name="nama"
-            placeholder="Masukan nama"
-        >
+            <input
+                type="text"
+                id="nama"
+                name="nama"
+                placeholder="Masukan nama"
+                value="{{ old('nama') }}"
+            >
 
-    </div>
+            @error('nama')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
 
+        <div class="organigram-form-group">
+            <label for="jabatan">Jabatan</label>
 
-    <div class="organigram-form-group">
+            <input
+                type="text"
+                id="jabatan"
+                name="jabatan"
+                placeholder="Masukan jabatan"
+                value="{{ old('jabatan') }}"
+            >
 
-        <label for="jabatan">
-            Jabatan
-        </label>
+            @error('jabatan')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
 
-        <input
-            type="text"
-            id="jabatan"
-            name="jabatan"
-            placeholder="Masukan jabatan"
-        >
+        <div class="organigram-form-group">
+            <label for="kelompok">Kelompok</label>
 
-    </div>
+            <select id="kelompok" name="kelompok">
+                <option value="">Pilih Kelompok</option>
 
+                @foreach ($kelompokOptions as $kelompok)
+                    <option
+                        value="{{ $kelompok }}"
+                        {{ old('kelompok') == $kelompok ? 'selected' : '' }}
+                    >
+                        {{ $kelompok }}
+                    </option>
+                @endforeach
+            </select>
 
-    <div class="organigram-form-actions">
+            @error('kelompok')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
 
-        <a
-            href="{{ route('admin.organigram') }}"
-            class="organigram-btn-cancel"
-        >
-            Batal
-        </a>
+        <div class="organigram-form-actions">
 
-        <button
-            type="submit"
-            class="organigram-btn-save"
-        >
-            Simpan
-        </button>
+            <a
+                href="{{ route('admin.organigram') }}"
+                class="organigram-btn-cancel"
+            >
+                Batal
+            </a>
 
-    </div>
+            <button
+                type="submit"
+                class="organigram-btn-save"
+            >
+                Simpan
+            </button>
+
+        </div>
+    </form>
 
 </div>
 

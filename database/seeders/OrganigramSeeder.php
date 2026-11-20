@@ -1,0 +1,113 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class OrganigramSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $data = [
+            ['nama' => 'AAN, S.Pd.I., K.P., M.Si.', 'jabatan' => 'Kepala Dinas', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Dr. Kusnandar, S.Pd, M.T', 'jabatan' => 'Sekretaris Dinas', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Desi Hendriyani, STP, MP', 'jabatan' => 'Kepala Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Iyus Jayusman, S.T., M.M', 'jabatan' => 'Kepala Bidang Pengembangan dan Pelestarian Perpustakaan', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Minar R.S, S.E, M.AP', 'jabatan' => 'Kepala Bidang Pengelolaan dan Pemeliharaan Kearsipan', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Dra. Hj. Uce Martina, AF.MP', 'jabatan' => 'Kepala Bidang Layanan dan Otomasi Perpustakaan', 'kelompok' => 'Pimpinan'],
+            ['nama' => 'Dr. Kusnandar, S.Pd, M.T', 'jabatan' => 'Sekretaris Dinas', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Lasmi Binawati, S.E', 'jabatan' => 'Kepala Sub Bagian Keuangan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Hj. Elly Setiadewi, S.T, M.M', 'jabatan' => 'Analis Sumber Daya Manusia Aparatur', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Abdul Gani, S.E, M.M', 'jabatan' => 'Perencana Ahli Muda', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Rd. Ronnie Kurniawan, S.T', 'jabatan' => 'Bendahara Pengeluaran', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Ika Puspita Sari', 'jabatan' => 'Pengelola Kepegawaian', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Sri Cahyani', 'jabatan' => 'Pengadministrasi Keuangan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Ratni Nuryati', 'jabatan' => 'Pengelola Akuntansi', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Ahmad Kosidin', 'jabatan' => 'Pengelola Sarana dan Prasarana', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Abdul Rauf', 'jabatan' => 'Pengadministrasi Umum', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Evi Sri Nuryanti, A.Md', 'jabatan' => 'JF Arsiparis Penyelia', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Bibo Satrio, A.Md', 'jabatan' => 'JF Arsiparis Pelaksana Lanjutan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Diki Waryanto, A.Md', 'jabatan' => 'JF Arsiparis Pelaksana Lanjutan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Fabianto Wahyu K.J., S.Komp', 'jabatan' => 'JF Pranata Komputer Ahli Pertama', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Maudina Hanifah, S.M', 'jabatan' => 'Pengelola Kearsipan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Muhammad Ghiffari', 'jabatan' => 'Pengelola Kearsipan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Zahran Labib Sulaiman', 'jabatan' => 'Pengelola Kearsipan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Karyono', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Hendra Irawan, S.T', 'jabatan' => 'JF Pranata Komputer Pertama', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Setiawan', 'jabatan' => 'Pengelola Barang dan Jasa', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Ade Jakaria', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Markuwat', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Sutrisno', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Muhamad Fahri Mubarok', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Sekretariat'],
+            ['nama' => 'Desi Hendrayani, S.TP, M.P', 'jabatan' => 'Kepala Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Eko Sulistiawan, S.E', 'jabatan' => 'Arsiparis Ahli Muda', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Diki Waryanto, A.Md', 'jabatan' => 'JF Arsiparis Pelaksana Lanjut', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Namira Ramadhina Putri, A.md.MRA', 'jabatan' => 'JF Arsiparis Pelaksana Terampil', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Deni Jatnika Supardi, S.H', 'jabatan' => 'Pranata Kearsipan', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Soleh Supena', 'jabatan' => 'Pengadministrasi Keuangan', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Yogie Friansyah, S.T', 'jabatan' => 'Pengelola Kearsipan', 'kelompok' => 'Bidang Pembinaan, Pelestarian dan Pengembangan Kearsipan'],
+            ['nama' => 'Minar R.S, S.E, M.AP', 'jabatan' => 'Kepala Bidang Pengelolaan dan Pemeliharaan Kearsipan', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Yeni Ernawati, S.H', 'jabatan' => 'Arsiparis Ahli Muda', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Puri Prameswari, S.H', 'jabatan' => 'Arsiparis Ahli Muda', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Yani Lestari', 'jabatan' => 'Pranata Kearsipan', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Asep Sodikin', 'jabatan' => 'Arsiparis Ahli Pertama', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Silvia Dwi Apriliani, A.Md', 'jabatan' => 'JF Arsiparis Pelaksana Terampil', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Maryadi Sudarmono', 'jabatan' => 'Pengelola Kearsipan', 'kelompok' => 'Bidang Pengelolaan dan Pemeliharaan Kearsipan'],
+            ['nama' => 'Dra. Hj. Uce Martina, AF.MP', 'jabatan' => 'Kepala Bidang Layanan dan Otomasi Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Emma Hermawati, S.Sos', 'jabatan' => 'Pustakawan Ahli Muda', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Ritta Utami Herawati, S.Sos', 'jabatan' => 'Pustakawan Ahli Muda', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Imadudin Somantri, S.H', 'jabatan' => 'Pustakawan Ahli Muda', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Farhan Kamaludin, A.Md', 'jabatan' => 'JF Pustakawan Terampil', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Ajeng Indah Sulastri, A.Md', 'jabatan' => 'JF Pustakawan Terampil', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Yana Supriatna', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Dhany Mudyana, S.Pd', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Muhamad Noval', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Renaldo Eliferd Potu', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Jesica Prisilia H., S.I.Pus', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Misbah Munir, S.Pdi', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Lia Mulyahati', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Hana Sari Nurjihan, S.Pd', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Layanan dan Otomasi Perpustakaan'],
+            ['nama' => 'Iyus Jayusman, S.T., M.M', 'jabatan' => 'Kepala Bidang Pengembangan dan Pelestarian Perpustakaan', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Irma, S.E', 'jabatan' => 'Pustakawan Ahli Muda', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Tonny Prasetya Nugraha', 'jabatan' => 'JF Arsiparis Ahli Pertama', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Rendy Iwan Hardian', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Ecin Kuraesin', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Dewi Sri Susilawati, S.I.Pus', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Triana Apriani, SHI, ME', 'jabatan' => 'Pengelola Perpustakaan', 'kelompok' => 'Bidang Pengembangan dan Pelestarian Perpustakaan'],
+            ['nama' => 'Edi Rasidi, A.Md', 'jabatan' => 'Kepala UPTD Diorama Kearsipan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Arie Lukmanul Hakim, S.Ip', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Fairuz Hadiani Mardhiyah Putri, S.Pd.M.Pd', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Indri Sukma Wirawati, S.T', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Chandra Januar W., S.Sos', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Yopi Aprianto, S.T', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Dina Meylinda, S.E', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Hadi Kusuma, S.Kom', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Mutia Faramida, A.Md I.Kom', 'jabatan' => 'Guide', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Rina Sintia', 'jabatan' => 'Penerima Tamu', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Rani Meydianti', 'jabatan' => 'Penerima Tamu', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Amirah S. Zahra', 'jabatan' => 'Penerima Tamu', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Erika Putri Hidayah', 'jabatan' => 'Penerima Tamu', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Rifan Pratama', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Ari Riyanto', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Derry Wijaya Kusumah, S.M', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Ali Muslihat', 'jabatan' => 'Petugas Kebersihan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Eggy Apriyana Putra', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Hendra Sujana', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Muhamad Jembar', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Enjang Hasanudin', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Rachman Saleh', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Muhamad Mansyur', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Irvan Maulana', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Zulkarnaen', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+            ['nama' => 'Mohamad Saepuloh', 'jabatan' => 'Petugas Keamanan', 'kelompok' => 'Bale Panyawangan Diorama'],
+        ];
+
+        foreach ($data as $item) {
+            DB::table('organigram')->updateOrInsert(
+                ['nama' => $item['nama'], 'jabatan' => $item['jabatan'], 'kelompok' => $item['kelompok']],
+                $item
+            );
+        }
+    }
+}

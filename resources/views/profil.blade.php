@@ -103,7 +103,7 @@
     <div class="site-container">
         <div class="profil-container-grid">
             <div class="profil-img-card">
-                <img src="{{ asset('images/profil.jpg') }}" alt="Gedung Perpustakaan Daerah Purwakarta">
+                <img src="{{ asset('images/gedung perpusda.jpeg') }}" alt="Gedung Perpustakaan Daerah Purwakarta">
             </div>
 
             <div class="profil-details-wrap">

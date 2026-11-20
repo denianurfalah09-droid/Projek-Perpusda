@@ -14,8 +14,9 @@ class Organigram extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nama',
-        'jabatan',
+    'nama',
+    'jabatan',
+    'kelompok',
     ];
 }
 

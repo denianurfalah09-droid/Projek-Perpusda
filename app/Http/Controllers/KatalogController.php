@@ -15,7 +15,7 @@ class KatalogController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Katalog::latest();
+        $query = Katalog::latest(); 
 
         // Filter pencarian judul/penulis/penerbit
         if ($request->filled('q')) {
